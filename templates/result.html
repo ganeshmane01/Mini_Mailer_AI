@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Email Status</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <!-- Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        min-height: 100vh;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        padding-top: 90px;
+      }
+
+      /* NAVBAR */
+      .navbar {
+        background: rgba(0, 0, 0, 0.7) !important;
+        backdrop-filter: blur(10px);
+      }
+
+      .nav-link {
+        color: white !important;
+        transition: 0.3s;
+      }
+
+      .nav-link:hover {
+        color: #ffd43b !important;
+      }
+
+      /* CARD */
+      .card {
+        border-radius: 20px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        background: white;
+        padding: 40px;
+        text-align: center;
+        animation: popup 0.6s ease;
+      }
+
+      @keyframes popup {
+        from {
+          transform: scale(0.5);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .success-icon {
+        font-size: 60px;
+        color: #2ecc71;
+        animation: bounce 1s infinite alternate;
+      }
+
+      .error-icon {
+        font-size: 60px;
+        color: #e74c3c;
+      }
+
+      @keyframes bounce {
+        from {
+          transform: translateY(0);
+        }
+        to {
+          transform: translateY(-10px);
+        }
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #339af0, #1c7ed6);
+        border: none;
+        border-radius: 12px;
+        padding: 10px 20px;
+      }
+
+      .btn-primary:hover {
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 🔥 NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="/">
+          <i class="bi bi-envelope-paper-fill"></i> MiniMailer
+        </a>
+
+        <div class="navbar-nav ms-auto">
+          <a class="nav-link" href="/">Home</a>
+          <a class="nav-link" href="/index">Send Email</a>
+          <a class="nav-link" href="{{ url_for('history') }}">History</a>
+          <a class="nav-link" href="{{ url_for('chat_help') }}">AI Help</a>
+          <a class="nav-link text-danger" href="{{ url_for('logout') }}"
+            >Logout</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- CONTENT -->
+    <div
+      class="container d-flex justify-content-center align-items-center"
+      style="height: 80vh"
+    >
+      <div class="card" style="width: 420px">
+        {% if "✅" in message %}
+        <div class="success-icon">
+          <i class="bi bi-check-circle-fill"></i>
+        </div>
+        <h5 class="text-success mt-3">{{ message }}</h5>
+        {% else %}
+        <div class="error-icon">
+          <i class="bi bi-x-circle-fill"></i>
+        </div>
+        <h5 class="text-danger mt-3">{{ message }}</h5>
+        {% endif %}
+
+        <a href="{{ url_for('index') }}" class="btn btn-primary mt-4">
+          <i class="bi bi-arrow-left"></i> Back to Home
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
