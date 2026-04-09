@@ -1,3 +1,4 @@
 config.py
 .env
 _pycache_
+venv
